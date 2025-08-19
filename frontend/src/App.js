@@ -652,79 +652,192 @@ const Homepage = () => {
       </section>
 
       {/* Tokenomics Section */}
-      <section id="tokenomics" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-charcoal-100 mb-4">Fuel the Research with $JNO</h2>
-          <p className="text-xl text-charcoal-400">Stake to unlock deeper insights and premium features</p>
+      <section id="tokenomics" className="max-w-7xl mx-auto px-6 py-24">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold text-charcoal-100 mb-6">
+            Powered by <span className="text-lime-400">$JNO</span> Tokenomics
+          </h2>
+          <p className="text-xl text-charcoal-400 max-w-3xl mx-auto">
+            Stake $JNO to unlock deeper research capabilities, priority access, and governance rights. 
+            A utility-first economy that rewards active participation.
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                <Coins className="w-4 h-4 text-charcoal-950" />
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="space-y-8">
+            <div className="flex items-start gap-6 group">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <Coins className="w-8 h-8 text-charcoal-950" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Stake → Research Credits</h3>
-                <p className="text-charcoal-400">Daily research credits for agent calls, backtests, and analysis</p>
+                <h3 className="text-2xl font-semibold text-charcoal-100 mb-3">Stake → Research Credits</h3>
+                <p className="text-charcoal-400 leading-relaxed">
+                  Stake $JNO tokens to receive daily Research Credits (RC). More stake means more credits 
+                  for advanced AI analysis, backtesting, and premium features.
+                </p>
+                <div className="mt-4 text-sm text-lime-400 font-mono bg-charcoal-800 rounded p-2 inline-block">
+                  RC/day = base × log₂(1 + stake/S₀) × tier_multiplier
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                <Zap className="w-4 h-4 text-charcoal-950" />
+            <div className="flex items-start gap-6 group">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <Zap className="w-8 h-8 text-charcoal-950" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Priority Access</h3>
-                <p className="text-charcoal-400">Early access to new agents and faster query processing</p>
+                <h3 className="text-2xl font-semibold text-charcoal-100 mb-3">Priority Access</h3>
+                <p className="text-charcoal-400 leading-relaxed">
+                  Higher tier stakers get priority processing, early access to new AI agents, 
+                  faster response times, and exclusive beta features before general release.
+                </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                <BarChart3 className="w-4 h-4 text-charcoal-950" />
+            <div className="flex items-start gap-6 group">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <BarChart3 className="w-8 h-8 text-charcoal-950" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Vision & Backtests</h3>
-                <p className="text-charcoal-400">Chart analysis and historical strategy testing</p>
+                <h3 className="text-2xl font-semibold text-charcoal-100 mb-3">Advanced Analytics</h3>
+                <p className="text-charcoal-400 leading-relaxed">
+                  Unlock chart vision analysis, portfolio risk modeling, custom alerts, 
+                  and comprehensive backtesting capabilities with higher stake tiers.
+                </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                <Users className="w-4 h-4 text-charcoal-950" />
+            <div className="flex items-start gap-6 group">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <Users className="w-8 h-8 text-charcoal-950" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Governance</h3>
-                <p className="text-charcoal-400">Vote on agent parameters, features, and platform direction</p>
+                <h3 className="text-2xl font-semibold text-charcoal-100 mb-3">Governance & Rewards</h3>
+                <p className="text-charcoal-400 leading-relaxed">
+                  Vote on agent parameters, new features, and platform direction. 
+                  Earn rewards by participating in the data operator economy.
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-charcoal-900 rounded-2xl p-8 border border-charcoal-800">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-charcoal-100">Token Pipeline</h3>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-charcoal-800 rounded-lg">
-                <span className="text-charcoal-300">Stake $JNO</span>
-                <ArrowRight className="w-4 h-4 text-lime-400" />
+          <div className="relative">
+            {/* Blockchain visualization */}
+            <div className="relative bg-gradient-to-br from-charcoal-900/80 to-charcoal-800/80 backdrop-blur-sm rounded-3xl p-8 border border-charcoal-700">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-charcoal-100 mb-2">Token Flow Pipeline</h3>
+                <p className="text-charcoal-400">Sustainable tokenomics driving platform growth</p>
               </div>
-              <div className="flex items-center justify-between p-4 bg-charcoal-800 rounded-lg">
-                <span className="text-charcoal-300">Earn Credits</span>
-                <ArrowRight className="w-4 h-4 text-lime-400" />
-              </div>
-              <div className="flex items-center justify-between p-4 bg-charcoal-800 rounded-lg">
-                <span className="text-charcoal-300">Use Research</span>
-                <ArrowRight className="w-4 h-4 text-lime-400" />
-              </div>
-              <div className="p-4 bg-lime-400/10 rounded-lg border border-lime-400/20">
-                <div className="text-lime-400 font-semibold mb-2">Fee Distribution</div>
-                <div className="text-sm text-charcoal-300 space-y-1">
-                  <div>• 30% Buy & Burn</div>
-                  <div>• 50% Operator Rewards</div>
-                  <div>• 20% Treasury</div>
+              
+              {/* Animated Flow */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-charcoal-800 to-charcoal-700 rounded-xl border border-charcoal-600 hover:border-lime-400/30 transition-all duration-300">
+                  <span className="text-charcoal-300 font-medium">Stake $JNO</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
+                    <ArrowRight className="w-4 h-4 text-lime-400" />
+                  </div>
                 </div>
+                
+                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-charcoal-800 to-charcoal-700 rounded-xl border border-charcoal-600 hover:border-lime-400/30 transition-all duration-300">
+                  <span className="text-charcoal-300 font-medium">Earn RC Daily</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                    <ArrowRight className="w-4 h-4 text-lime-400" />
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-charcoal-800 to-charcoal-700 rounded-xl border border-charcoal-600 hover:border-lime-400/30 transition-all duration-300">
+                  <span className="text-charcoal-300 font-medium">Use AI Research</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                    <ArrowRight className="w-4 h-4 text-lime-400" />
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-gradient-to-r from-lime-400/10 to-lime-400/5 rounded-xl border border-lime-400/20">
+                  <div className="text-lime-400 font-semibold mb-3 text-center">Fee Distribution</div>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-lime-400 font-bold text-lg">30%</div>
+                      <div className="text-charcoal-400 text-xs">Buy & Burn</div>
+                    </div>
+                    <div>
+                      <div className="text-lime-400 font-bold text-lg">50%</div>
+                      <div className="text-charcoal-400 text-xs">Operators</div>
+                    </div>
+                    <div>
+                      <div className="text-lime-400 font-bold text-lg">20%</div>
+                      <div className="text-charcoal-400 text-xs">Treasury</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Floating blockchain elements */}
+            <div className="absolute -top-4 -right-4 w-20 h-20 opacity-20">
+              <img 
+                src="https://images.unsplash.com/photo-1639322537228-f710d846310a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxibG9ja2NoYWlufGVufDB8fHx8MTc1NTU4NzU3NHww&ixlib=rb-4.1.0&q=85" 
+                alt="Blockchain cubes" 
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-6 w-16 h-16 opacity-10">
+              <img 
+                src="https://images.unsplash.com/photo-1639815188546-c43c240ff4df?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHw0fHxibG9ja2NoYWlufGVufDB8fHx8MTc1NTU4NzU3NHww&ixlib=rb-4.1.0&q=85" 
+                alt="Blockchain structure" 
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Tier Comparison */}
+        <div className="bg-gradient-to-r from-charcoal-900/50 via-charcoal-800/50 to-charcoal-900/50 rounded-3xl p-12 border border-charcoal-700/50 backdrop-blur-sm">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-charcoal-100 mb-4">Staking Tiers</h3>
+            <p className="text-charcoal-400">Choose your tier and unlock progressive benefits</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-charcoal-900 rounded-2xl p-6 border border-charcoal-700 text-center">
+              <div className="text-charcoal-300 font-semibold mb-2">Free</div>
+              <div className="text-3xl font-bold text-lime-400 mb-4">0 $JNO</div>
+              <div className="space-y-2 text-sm text-charcoal-400">
+                <div>10 RC/day</div>
+                <div>Basic analysis</div>
+                <div>Standard latency</div>
+              </div>
+            </div>
+            
+            <div className="bg-charcoal-900 rounded-2xl p-6 border border-charcoal-700 text-center">
+              <div className="text-charcoal-300 font-semibold mb-2">Analyst</div>
+              <div className="text-3xl font-bold text-lime-400 mb-4">1K $JNO</div>
+              <div className="space-y-2 text-sm text-charcoal-400">
+                <div>100 RC/day</div>
+                <div>Multi-chart analysis</div>
+                <div>Priority processing</div>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-br from-lime-400/10 to-lime-400/5 rounded-2xl p-6 border border-lime-400/30 text-center">
+              <div className="text-lime-400 font-semibold mb-2">Pro</div>
+              <div className="text-3xl font-bold text-lime-400 mb-4">10K $JNO</div>
+              <div className="space-y-2 text-sm text-charcoal-300">
+                <div>500 RC/day</div>
+                <div>Advanced backtesting</div>
+                <div>API access</div>
+              </div>
+            </div>
+            
+            <div className="bg-charcoal-900 rounded-2xl p-6 border border-charcoal-700 text-center">
+              <div className="text-charcoal-300 font-semibold mb-2">Fund</div>
+              <div className="text-3xl font-bold text-lime-400 mb-4">100K $JNO</div>
+              <div className="space-y-2 text-sm text-charcoal-400">
+                <div>Unlimited RC</div>
+                <div>Dedicated agents</div>
+                <div>Custom SLA</div>
               </div>
             </div>
           </div>
