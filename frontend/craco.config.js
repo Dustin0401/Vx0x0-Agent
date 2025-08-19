@@ -43,4 +43,10 @@ module.exports = {
       return webpackConfig;
     },
   },
+  devServer: {
+    historyApiFallback: true,
+    client: {
+      overlay: false,
+    },
+  },
 };
