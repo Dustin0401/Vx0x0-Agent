@@ -1,34 +1,158 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+:root {
+  /* Dark Charcoal + Lime Color Palette */
+  --charcoal-950: #0B0F0A;
+  --charcoal-900: #111612;
+  --charcoal-800: #1A2019;
+  --charcoal-700: #2A3529;
+  --charcoal-600: #3A4A39;
+  --charcoal-500: #4A5F49;
+  --charcoal-400: #5A7459;
+  --charcoal-300: #98A28F;
+  --charcoal-200: #B8C2AF;
+  --charcoal-100: #D6E3CF;
+  --lime-400: #C8F31D;
+  --lime-300: #D4F442;
+  --lime-500: #A8D108;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--charcoal-950);
+  color: var(--charcoal-100);
+  line-height: 1.6;
 }
 
-.App-link {
-    color: #61dafb;
+.App {
+  min-height: 100vh;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--charcoal-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--charcoal-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--charcoal-500);
+}
+
+/* Utility Classes for Charcoal Colors */
+.bg-charcoal-950 { background-color: var(--charcoal-950); }
+.bg-charcoal-900 { background-color: var(--charcoal-900); }
+.bg-charcoal-800 { background-color: var(--charcoal-800); }
+.bg-charcoal-700 { background-color: var(--charcoal-700); }
+.bg-charcoal-600 { background-color: var(--charcoal-600); }
+
+.text-charcoal-100 { color: var(--charcoal-100); }
+.text-charcoal-200 { color: var(--charcoal-200); }
+.text-charcoal-300 { color: var(--charcoal-300); }
+.text-charcoal-400 { color: var(--charcoal-400); }
+.text-charcoal-500 { color: var(--charcoal-500); }
+.text-charcoal-950 { color: var(--charcoal-950); }
+
+.border-charcoal-800 { border-color: var(--charcoal-800); }
+.border-charcoal-700 { border-color: var(--charcoal-700); }
+.border-charcoal-600 { border-color: var(--charcoal-600); }
+
+.bg-lime-400 { background-color: var(--lime-400); }
+.bg-lime-300 { background-color: var(--lime-300); }
+.text-lime-400 { color: var(--lime-400); }
+.border-lime-400 { border-color: var(--lime-400); }
+
+/* Smooth transitions */
+* {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Button hover effects */
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Card hover effects */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Focus states */
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--lime-400);
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .text-6xl {
+    font-size: 3rem;
+  }
+  
+  .text-4xl {
+    font-size: 2rem;
+  }
+  
+  .px-8 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+/* Custom backdrop blur */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--bg));
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--lime-400);
+  color: var(--charcoal-950);
 }
