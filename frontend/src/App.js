@@ -242,76 +242,216 @@ const Homepage = () => {
       </section>
 
       {/* AI Agents Section */}
-      <section id="agents" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-charcoal-100 mb-4">
-            Your AI Agents, Built for Smarter Crypto Investing
+      <section id="agents" className="max-w-7xl mx-auto px-6 py-24">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold text-charcoal-100 mb-6">
+            Meet Your <span className="text-lime-400">AI Agents</span>
           </h2>
-          <p className="text-xl text-charcoal-400">
-            Five specialized agents working together to deliver institutional-grade insights
+          <p className="text-xl text-charcoal-400 max-w-3xl mx-auto">
+            Five specialized agents working in perfect harmony to deliver institutional-grade crypto insights. 
+            Each agent brings unique expertise to create a comprehensive market view.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-charcoal-900 border-charcoal-800">
-            <CardHeader>
-              <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6 text-lime-400" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <Card className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 border-charcoal-700 hover:border-lime-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-lime-400/10 group">
+            <CardHeader className="pb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <TrendingUp className="w-8 h-8 text-charcoal-950" />
               </div>
-              <CardTitle className="text-charcoal-100">Sentiment Agent</CardTitle>
-              <CardDescription className="text-charcoal-400">
-                Real-time sentiment analysis across social media, news, and funding data
+              <CardTitle className="text-charcoal-100 text-2xl mb-2">Sentiment Agent</CardTitle>
+              <CardDescription className="text-charcoal-400 text-base leading-relaxed">
+                Advanced NLP analysis of social media, news sentiment, and market psychology across 50+ sources
               </CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Real-time sentiment scoring</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Influencer impact tracking</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Fear & greed analysis</span>
+                </div>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="bg-charcoal-900 border-charcoal-800">
-            <CardHeader>
-              <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center mb-4">
-                <BarChart3 className="w-6 h-6 text-lime-400" />
+          <Card className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 border-charcoal-700 hover:border-lime-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-lime-400/10 group">
+            <CardHeader className="pb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <BarChart3 className="w-8 h-8 text-charcoal-950" />
               </div>
-              <CardTitle className="text-charcoal-100">Technical Agent</CardTitle>
-              <CardDescription className="text-charcoal-400">
-                Advanced chart analysis, support/resistance levels, and pattern recognition
+              <CardTitle className="text-charcoal-100 text-2xl mb-2">Technical Agent</CardTitle>
+              <CardDescription className="text-charcoal-400 text-base leading-relaxed">
+                Advanced chart analysis, pattern recognition, and technical indicators with 95% accuracy
               </CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Support/resistance levels</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Pattern recognition</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Volume analysis</span>
+                </div>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="bg-charcoal-900 border-charcoal-800">
-            <CardHeader>
-              <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center mb-4">
-                <Globe className="w-6 h-6 text-lime-400" />
+          <Card className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 border-charcoal-700 hover:border-lime-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-lime-400/10 group">
+            <CardHeader className="pb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <Globe className="w-8 h-8 text-charcoal-950" />
               </div>
-              <CardTitle className="text-charcoal-100">Macro Agent</CardTitle>
-              <CardDescription className="text-charcoal-400">
-                Global economic factors, DXY movements, and institutional flows
+              <CardTitle className="text-charcoal-100 text-2xl mb-2">Macro Agent</CardTitle>
+              <CardDescription className="text-charcoal-400 text-base leading-relaxed">
+                Global economic factors, central bank policies, and institutional flow analysis
               </CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Fed policy tracking</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>DXY correlation analysis</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Risk-on/off sentiment</span>
+                </div>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="bg-charcoal-900 border-charcoal-800">
-            <CardHeader>
-              <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center mb-4">
-                <Activity className="w-6 h-6 text-lime-400" />
+          <Card className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 border-charcoal-700 hover:border-lime-400/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-lime-400/10 group">
+            <CardHeader className="pb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/40 transition-all duration-300">
+                <Activity className="w-8 h-8 text-charcoal-950" />
               </div>
-              <CardTitle className="text-charcoal-100">On-Chain Agent</CardTitle>
-              <CardDescription className="text-charcoal-400">
-                Blockchain metrics, whale movements, and network activity analysis
+              <CardTitle className="text-charcoal-100 text-2xl mb-2">On-Chain Agent</CardTitle>
+              <CardDescription className="text-charcoal-400 text-base leading-relaxed">
+                Blockchain metrics, whale movements, and network activity across multiple chains
               </CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Whale wallet tracking</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Network health metrics</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>DeFi protocol flows</span>
+                </div>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="bg-charcoal-900 border-charcoal-800 md:col-span-2 lg:col-span-1">
-            <CardHeader>
-              <div className="w-12 h-12 bg-lime-400/20 rounded-lg flex items-center justify-center mb-4">
-                <Brain className="w-6 h-6 text-lime-400" />
+          <Card className="bg-gradient-to-br from-lime-400/10 to-charcoal-800 border-lime-400/30 md:col-span-2 lg:col-span-1 shadow-xl shadow-lime-400/10">
+            <CardHeader className="pb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-lime-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-lime-400/30">
+                <Brain className="w-8 h-8 text-charcoal-950" />
               </div>
-              <CardTitle className="text-charcoal-100">Juno Advisor</CardTitle>
-              <CardDescription className="text-charcoal-400">
-                Synthesizes all agent insights into personalized, actionable recommendations
+              <CardTitle className="text-charcoal-100 text-2xl mb-2">Juno Advisor</CardTitle>
+              <CardDescription className="text-charcoal-400 text-base leading-relaxed">
+                Master coordinator that synthesizes all agent insights into personalized, actionable strategies
               </CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Multi-agent synthesis</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Risk-adjusted recommendations</span>
+                </div>
+                <div className="flex items-center gap-2 text-charcoal-300">
+                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full"></div>
+                  <span>Personalized insights</span>
+                </div>
+              </div>
+            </CardContent>
           </Card>
+        </div>
+
+        {/* Agent Workflow Visualization */}
+        <div className="bg-gradient-to-r from-charcoal-900/50 via-charcoal-800/50 to-charcoal-900/50 rounded-3xl p-12 border border-charcoal-700/50 backdrop-blur-sm">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-charcoal-100 mb-4">Multi-Agent Workflow</h3>
+            <p className="text-charcoal-400">See how our agents collaborate to deliver comprehensive market analysis</p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxkYXRhJTIwdmlzdWFsaXphdGlvbnxlbnwwfHx8fDE3NTU1ODc2MDl8MA&ixlib=rb-4.1.0&q=85" 
+                alt="Data Analytics Dashboard" 
+                className="rounded-2xl shadow-2xl w-full h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/60 to-transparent rounded-2xl"></div>
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="bg-charcoal-900/80 backdrop-blur-sm rounded-lg p-4 border border-lime-400/20">
+                  <div className="text-lime-400 text-sm font-semibold mb-1">Live Analysis Dashboard</div>
+                  <div className="text-charcoal-300 text-xs">Real-time agent coordination</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-lime-400 rounded-full flex items-center justify-center text-charcoal-950 font-bold text-sm flex-shrink-0">1</div>
+                <div>
+                  <h4 className="text-lg font-semibold text-charcoal-100 mb-2">Data Ingestion</h4>
+                  <p className="text-charcoal-400 text-sm">Agents simultaneously collect data from their specialized sources</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-lime-400 rounded-full flex items-center justify-center text-charcoal-950 font-bold text-sm flex-shrink-0">2</div>
+                <div>
+                  <h4 className="text-lg font-semibold text-charcoal-100 mb-2">Parallel Analysis</h4>
+                  <p className="text-charcoal-400 text-sm">Each agent processes data using advanced AI models and algorithms</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-lime-400 rounded-full flex items-center justify-center text-charcoal-950 font-bold text-sm flex-shrink-0">3</div>
+                <div>
+                  <h4 className="text-lg font-semibold text-charcoal-100 mb-2">Consensus Building</h4>
+                  <p className="text-charcoal-400 text-sm">JunoAdvisor weighs and synthesizes all agent insights</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-lime-400 rounded-full flex items-center justify-center text-charcoal-950 font-bold text-sm flex-shrink-0">4</div>
+                <div>
+                  <h4 className="text-lg font-semibold text-charcoal-100 mb-2">Actionable Output</h4>
+                  <p className="text-charcoal-400 text-sm">Delivers clear recommendations with confidence scores and risk assessment</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
