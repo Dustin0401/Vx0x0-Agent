@@ -844,20 +844,133 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-charcoal-800 bg-charcoal-950">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center">
-                <Bot className="w-5 h-5 text-charcoal-950" />
-              </div>
-              <span className="text-2xl font-bold text-charcoal-100">Juno</span>
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="bg-gradient-to-br from-lime-400/10 via-lime-400/5 to-transparent rounded-3xl p-12 lg:p-20 border border-lime-400/20 text-center relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <img 
+              src="https://images.unsplash.com/photo-1645839078449-124db8a049fd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxBSSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MHx8fHwxNzU1NTg3NjA2fDA&ixlib=rb-4.1.0&q=85" 
+              alt="Neural network background" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <div className="relative z-10">
+            <h2 className="text-5xl lg:text-6xl font-bold text-charcoal-100 mb-6">
+              Ready to Trade <span className="text-lime-400">Smarter?</span>
+            </h2>
+            <p className="text-xl text-charcoal-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Join thousands of traders and investors who are already using Juno's AI-powered insights 
+              to make better decisions in the crypto markets. Start your journey today.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+              <Link to="/chat">
+                <Button className="bg-lime-400 text-charcoal-950 hover:bg-lime-300 px-10 py-6 text-xl font-bold rounded-2xl shadow-lg shadow-lime-400/20 hover:shadow-lime-400/40 hover:-translate-y-1 transition-all duration-300">
+                  Launch Juno Platform
+                  <ArrowRight className="ml-3 w-6 h-6" />
+                </Button>
+              </Link>
+              <Button variant="outline" className="border-charcoal-600 text-charcoal-300 hover:bg-charcoal-800 hover:border-lime-400/50 px-10 py-6 text-xl font-semibold rounded-2xl transition-all duration-300">
+                Book a Demo
+              </Button>
             </div>
-            <p className="text-charcoal-400 mb-6">AI-native crypto research platform</p>
-            <div className="text-xs text-charcoal-500">
-              <p>$JNO is a utility token for access and governance. Not investment advice.</p>
-              <p className="mt-2">This is research, not financial advice. Markets are risky.</p>
+            
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-charcoal-700">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-lime-400 mb-2">99.9%</div>
+                <div className="text-charcoal-400">Platform Uptime</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-lime-400 mb-2">10K+</div>
+                <div className="text-charcoal-400">Active Users</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-lime-400 mb-2">$2B+</div>
+                <div className="text-charcoal-400">Assets Analyzed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-charcoal-800 bg-gradient-to-br from-charcoal-950 to-charcoal-900">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid lg:grid-cols-4 gap-12 mb-12">
+            {/* Brand */}
+            <div className="lg:col-span-1">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-lime-400 rounded-xl flex items-center justify-center shadow-lg shadow-lime-400/20">
+                  <Bot className="w-6 h-6 text-charcoal-950" />
+                </div>
+                <span className="text-3xl font-bold text-charcoal-100">Juno</span>
+              </div>
+              <p className="text-charcoal-400 leading-relaxed mb-6">
+                The next-generation AI-native crypto research platform. Institutional-grade insights 
+                powered by multi-agent intelligence.
+              </p>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 bg-charcoal-800 rounded-lg flex items-center justify-center hover:bg-lime-400/20 transition-colors cursor-pointer">
+                  <span className="text-charcoal-400 hover:text-lime-400 transition-colors">𝕏</span>
+                </div>
+                <div className="w-10 h-10 bg-charcoal-800 rounded-lg flex items-center justify-center hover:bg-lime-400/20 transition-colors cursor-pointer">
+                  <span className="text-charcoal-400 hover:text-lime-400 transition-colors">📧</span>
+                </div>
+                <div className="w-10 h-10 bg-charcoal-800 rounded-lg flex items-center justify-center hover:bg-lime-400/20 transition-colors cursor-pointer">
+                  <span className="text-charcoal-400 hover:text-lime-400 transition-colors">💬</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Product */}
+            <div>
+              <h4 className="text-lg font-semibold text-charcoal-100 mb-6">Product</h4>
+              <div className="space-y-4">
+                <Link to="/chat" className="block text-charcoal-400 hover:text-lime-400 transition-colors">AI Agents</Link>
+                <a href="#features" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Features</a>
+                <a href="#tokenomics" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Tokenomics</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">API</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Integrations</a>
+              </div>
+            </div>
+            
+            {/* Resources */}
+            <div>
+              <h4 className="text-lg font-semibold text-charcoal-100 mb-6">Resources</h4>
+              <div className="space-y-4">
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Documentation</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Tutorials</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Blog</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Research Papers</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Community</a>
+              </div>
+            </div>
+            
+            {/* Company */}
+            <div>
+              <h4 className="text-lg font-semibold text-charcoal-100 mb-6">Company</h4>
+              <div className="space-y-4">
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">About</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Careers</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Press</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Security</a>
+                <a href="#" className="block text-charcoal-400 hover:text-lime-400 transition-colors">Contact</a>
+              </div>
+            </div>
+          </div>
+          
+          <Separator className="bg-charcoal-800 mb-8" />
+          
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-charcoal-500 text-sm mb-4 md:mb-0">
+              <p>© 2025 Juno. All rights reserved.</p>
+            </div>
+            <div className="text-xs text-charcoal-500 text-center md:text-right max-w-md">
+              <p className="mb-2">$JNO is a utility token for access and governance. Not investment advice.</p>
+              <p>This is research, not financial advice. Crypto markets are highly volatile and risky.</p>
             </div>
           </div>
         </div>
