@@ -365,7 +365,7 @@ async def chat_endpoint(message: dict):
     """Chat interface for research queries"""
     try:
         user_message = message.get("message", "")
-        session_id = message.get("session_id", str(uuid.uuid4()))
+        session_id = message.get("session_id") or str(uuid.uuid4())
         
         # Simple query parsing - look for asset mentions
         asset = "BTC"
