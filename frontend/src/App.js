@@ -456,42 +456,197 @@ const Homepage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-charcoal-100 mb-4">Powerful Features</h2>
+      <section id="features" className="max-w-7xl mx-auto px-6 py-24">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold text-charcoal-100 mb-6">
+            Enterprise-Grade <span className="text-lime-400">Features</span>
+          </h2>
+          <p className="text-xl text-charcoal-400 max-w-3xl mx-auto">
+            Built for professionals who demand precision, speed, and reliability in their crypto research workflow.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Brain className="w-8 h-8 text-charcoal-950" />
+        <div className="grid lg:grid-cols-2 gap-12 mb-20">
+          {/* Feature 1 */}
+          <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-3xl p-8 border border-charcoal-700 hover:border-lime-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-lime-400/10">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20">
+                <Brain className="w-8 h-8 text-charcoal-950" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-charcoal-100 mb-4">AI Portfolio Assistant</h3>
+                <p className="text-charcoal-400 mb-6 leading-relaxed">
+                  Advanced portfolio analysis with risk assessment, correlation matrices, and intelligent rebalancing suggestions. 
+                  Our AI understands your investment goals and risk tolerance.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Shield className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Risk-adjusted position sizing</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <TrendingUp className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Performance optimization</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Activity className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Real-time alerts</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-charcoal-100 mb-2">AI Portfolio Assistant</h3>
-            <p className="text-charcoal-400">Smart portfolio analysis and rebalancing suggestions</p>
           </div>
 
-          <div className="text-center">
-            <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-8 h-8 text-charcoal-950" />
+          {/* Feature 2 */}
+          <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-3xl p-8 border border-charcoal-700 hover:border-lime-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-lime-400/10">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20">
+                <Zap className="w-8 h-8 text-charcoal-950" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-charcoal-100 mb-4">Multi-Agent Intelligence</h3>
+                <p className="text-charcoal-400 mb-6 leading-relaxed">
+                  Our five specialized agents work in perfect harmony, processing thousands of data points 
+                  across sentiment, technical, macro, and on-chain dimensions in real-time.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Globe className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">50+ data sources</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Brain className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Advanced AI models</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Sub-second processing</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Multi-Agent Intelligence</h3>
-            <p className="text-charcoal-400">Five specialized agents working in perfect harmony</p>
           </div>
 
-          <div className="text-center">
-            <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="w-8 h-8 text-charcoal-950" />
+          {/* Feature 3 */}
+          <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-3xl p-8 border border-charcoal-700 hover:border-lime-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-lime-400/10">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20">
+                <BarChart3 className="w-8 h-8 text-charcoal-950" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-charcoal-100 mb-4">Advanced Analytics</h3>
+                <p className="text-charcoal-400 mb-6 leading-relaxed">
+                  Professional-grade charting tools, backtesting capabilities, and strategy simulation. 
+                  Test your theories before risking capital with our comprehensive analytics suite.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <BarChart3 className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Advanced charting</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <TrendingUp className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Strategy backtesting</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Shield className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Risk modeling</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-charcoal-100 mb-2">One-Click Execution</h3>
-            <p className="text-charcoal-400">Paper trading and strategy simulation built-in</p>
           </div>
 
-          <div className="text-center">
-            <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <MessageSquare className="w-8 h-8 text-charcoal-950" />
+          {/* Feature 4 */}
+          <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-3xl p-8 border border-charcoal-700 hover:border-lime-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-lime-400/10">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-lime-400/20">
+                <MessageSquare className="w-8 h-8 text-charcoal-950" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-charcoal-100 mb-4">Intelligent Chat Interface</h3>
+                <p className="text-charcoal-400 mb-6 leading-relaxed">
+                  Natural language queries get instant, comprehensive responses. Ask complex questions 
+                  and receive structured analysis with confidence scores and actionable insights.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Natural language processing</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Brain className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Context-aware responses</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-4 h-4 text-lime-400" />
+                    <span className="text-charcoal-300 text-sm">Instant analysis</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-charcoal-100 mb-2">Mobile-First Simplicity</h3>
-            <p className="text-charcoal-400">Clean, intuitive interface optimized for all devices</p>
+          </div>
+        </div>
+
+        {/* Advanced Features Showcase */}
+        <div className="bg-gradient-to-r from-charcoal-900 via-charcoal-800 to-charcoal-900 rounded-3xl p-12 border border-charcoal-700">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwzfHxkYXRhJTIwdmlzdWFsaXphdGlvbnxlbnwwfHx8fDE3NTU1ODc2MDl8MA&ixlib=rb-4.1.0&q=85" 
+                alt="Advanced Trading Dashboard" 
+                className="rounded-2xl shadow-2xl w-full h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/50 to-transparent rounded-2xl"></div>
+              
+              {/* Floating UI Elements */}
+              <div className="absolute top-4 right-4 bg-charcoal-900/90 backdrop-blur-sm rounded-lg p-3 border border-lime-400/20">
+                <div className="text-lime-400 text-sm font-semibold">Live Data</div>
+                <div className="text-charcoal-300 text-xs">Real-time analysis</div>
+              </div>
+              
+              <div className="absolute bottom-4 left-4 bg-charcoal-900/90 backdrop-blur-sm rounded-lg p-3 border border-lime-400/20">
+                <div className="text-lime-400 text-sm font-semibold">95%</div>
+                <div className="text-charcoal-300 text-xs">Accuracy rate</div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-3xl font-bold text-charcoal-100 mb-6">
+                Professional Trading <span className="text-lime-400">Dashboard</span>
+              </h3>
+              <p className="text-charcoal-300 mb-8 leading-relaxed">
+                Access institutional-grade tools and insights through our intuitive interface. 
+                Monitor multiple assets, track your strategies, and receive real-time alerts 
+                all in one powerful platform.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-lime-400 mb-2">∞</div>
+                  <div className="text-charcoal-400 text-sm">Data Points</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-lime-400 mb-2">5ms</div>
+                  <div className="text-charcoal-400 text-sm">Response Time</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-lime-400 mb-2">24/7</div>
+                  <div className="text-charcoal-400 text-sm">Monitoring</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-lime-400 mb-2">99.9%</div>
+                  <div className="text-charcoal-400 text-sm">Uptime</div>
+                </div>
+              </div>
+              
+              <Link to="/chat">
+                <Button className="bg-lime-400 text-charcoal-950 hover:bg-lime-300 px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-lime-400/20">
+                  Try Live Demo
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
