@@ -985,6 +985,9 @@ const ChatApp = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [currentAsset, setCurrentAsset] = useState("BTC");
+  const [marketData, setMarketData] = useState({});
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -1000,9 +1003,26 @@ const ChatApp = () => {
     setMessages([{
       id: 1,
       type: 'assistant',
-      content: 'Welcome to Juno! I\'m your AI crypto research assistant. Ask me about any cryptocurrency, market trends, or get technical analysis. Try asking: "Analyze BTC" or "What\'s the sentiment on Ethereum?"'
+      content: 'Welcome to Juno! I\'m your AI crypto research assistant powered by five specialized agents. I can analyze any cryptocurrency, provide market insights, technical analysis, sentiment data, and on-chain metrics. Try asking: "Analyze BTC" or "What\'s the sentiment on Ethereum?"',
+      timestamp: new Date(),
     }]);
+
+    // Fetch initial market data
+    fetchMarketData();
   }, []);
+
+  const fetchMarketData = async () => {
+    try {
+      const btcResponse = await axios.get(`${API}/market/BTC`);
+      const ethResponse = await axios.get(`${API}/market/ETH`);
+      setMarketData({
+        BTC: btcResponse.data,
+        ETH: ethResponse.data
+      });
+    } catch (error) {
+      console.error('Market data fetch error:', error);
+    }
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -1010,7 +1030,8 @@ const ChatApp = () => {
     const userMessage = {
       id: Date.now(),
       type: 'user',
-      content: input
+      content: input,
+      timestamp: new Date(),
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -1033,7 +1054,8 @@ const ChatApp = () => {
         id: Date.now() + 1,
         type: 'assistant',
         content: research.summary,
-        research: research
+        research: research,
+        timestamp: new Date(),
       };
 
       setMessages(prev => [...prev, assistantMessage]);
@@ -1042,7 +1064,9 @@ const ChatApp = () => {
       const errorMessage = {
         id: Date.now() + 1,
         type: 'assistant',
-        content: 'Sorry, I encountered an error processing your request. Please try again.'
+        content: 'Sorry, I encountered an error processing your request. Please try again.',
+        timestamp: new Date(),
+        isError: true
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -1057,129 +1081,466 @@ const ChatApp = () => {
     }
   };
 
+  const quickActions = [
+    { label: "Analyze BTC", query: "Analyze Bitcoin market conditions and sentiment" },
+    { label: "ETH Technical", query: "Provide technical analysis for Ethereum" },
+    { label: "Market Overview", query: "Give me an overview of crypto markets today" },
+    { label: "On-Chain Data", query: "Show me on-chain metrics for major cryptocurrencies" }
+  ];
+
   return (
-    <div className="min-h-screen bg-charcoal-950 flex flex-col">
-      {/* Header */}
-      <header className="border-b border-charcoal-800 bg-charcoal-900/50 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-charcoal-950" />
-            </div>
-            <span className="text-2xl font-bold text-charcoal-100">Juno</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Badge variant="outline" className="border-lime-400/50 text-lime-400">
-              Free Tier
-            </Badge>
-            <Button variant="outline" size="sm" className="border-charcoal-600 text-charcoal-300">
-              Connect Wallet
+    <div className="min-h-screen bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950 flex">
+      {/* Sidebar */}
+      <div className={`${sidebarOpen ? 'w-80' : 'w-16'} transition-all duration-300 bg-gradient-to-b from-charcoal-900 to-charcoal-800 border-r border-charcoal-700 flex flex-col`}>
+        {/* Sidebar Header */}
+        <div className="p-6 border-b border-charcoal-700">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-lime-400 rounded-xl flex items-center justify-center shadow-lg shadow-lime-400/20">
+                <Bot className="w-6 h-6 text-charcoal-950" />
+              </div>
+              {sidebarOpen && <span className="text-2xl font-bold text-charcoal-100">Juno</span>}
+            </Link>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="text-charcoal-400 hover:text-lime-400"
+            >
+              <MessageSquare className="w-5 h-5" />
             </Button>
           </div>
         </div>
-      </header>
 
-      {/* Chat Area */}
-      <div className="flex-1 max-w-4xl mx-auto w-full px-6 py-8">
-        <ScrollArea className="h-[calc(100vh-200px)] mb-6">
-          <div className="space-y-6">
-            {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-2xl ${message.type === 'user' ? 'bg-lime-400 text-charcoal-950' : 'bg-charcoal-900 text-charcoal-100'} rounded-2xl px-6 py-4`}>
-                  <p className="whitespace-pre-wrap">{message.content}</p>
-                  
-                  {message.research && (
-                    <div className="mt-4 space-y-4">
-                      <Separator className="bg-charcoal-700" />
-                      
-                      {/* Market View */}
-                      <div>
-                        <h4 className="font-semibold text-charcoal-200 mb-2">Market Analysis</h4>
-                        <div className="flex items-center gap-4 text-sm">
-                          <Badge className={`${message.research.market_view.bias === 'bullish' ? 'bg-green-500' : message.research.market_view.bias === 'bearish' ? 'bg-red-500' : 'bg-gray-500'}`}>
-                            {message.research.market_view.bias} {message.research.market_view.conviction}%
-                          </Badge>
-                          <span className="text-charcoal-400">{message.research.market_view.asset} • {message.research.market_view.timeframe}</span>
+        {sidebarOpen && (
+          <>
+            {/* Market Data */}
+            <div className="p-6 border-b border-charcoal-700">
+              <h3 className="text-lg font-semibold text-charcoal-100 mb-4">Live Markets</h3>
+              <div className="space-y-3">
+                {Object.entries(marketData).map(([symbol, data]) => (
+                  <div key={symbol} className="bg-charcoal-800 rounded-lg p-3 hover:bg-charcoal-750 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-lime-400/20 rounded-full flex items-center justify-center">
+                          <Coins className="w-4 h-4 text-lime-400" />
+                        </div>
+                        <span className="font-medium text-charcoal-100">{symbol}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-charcoal-100 font-semibold">
+                          ${data.usd?.toLocaleString()}
+                        </div>
+                        <div className={`text-xs ${data.usd_24h_change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          {data.usd_24h_change >= 0 ? '+' : ''}{data.usd_24h_change?.toFixed(2)}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* AI Agents Status */}
+            <div className="p-6 border-b border-charcoal-700">
+              <h3 className="text-lg font-semibold text-charcoal-100 mb-4">AI Agents</h3>
+              <div className="space-y-3">
+                {[
+                  { name: "Sentiment", icon: TrendingUp, status: "active", color: "text-green-400" },
+                  { name: "Technical", icon: BarChart3, status: "active", color: "text-green-400" },
+                  { name: "Macro", icon: Globe, status: "active", color: "text-green-400" },
+                  { name: "On-Chain", icon: Activity, status: "active", color: "text-green-400" },
+                  { name: "Advisor", icon: Brain, status: "active", color: "text-lime-400" }
+                ].map((agent) => (
+                  <div key={agent.name} className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-charcoal-800 rounded-lg flex items-center justify-center">
+                        <agent.icon className="w-4 h-4 text-charcoal-300" />
+                      </div>
+                      <span className="text-charcoal-300 text-sm">{agent.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${agent.color} animate-pulse`}></div>
+                      <span className={`text-xs ${agent.color}`}>Online</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="p-6 flex-1">
+              <h3 className="text-lg font-semibold text-charcoal-100 mb-4">Quick Actions</h3>
+              <div className="space-y-2">
+                {quickActions.map((action, index) => (
+                  <Button
+                    key={index}
+                    variant="ghost"
+                    className="w-full justify-start text-charcoal-400 hover:text-lime-400 hover:bg-charcoal-800 text-sm"
+                    onClick={() => setInput(action.query)}
+                  >
+                    <Zap className="w-4 h-4 mr-2" />
+                    {action.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="border-b border-charcoal-800 bg-charcoal-950/50 backdrop-blur-sm">
+          <div className="px-8 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div>
+                <h1 className="text-2xl font-bold text-charcoal-100">AI Research Console</h1>
+                <p className="text-charcoal-400 text-sm">Multi-agent crypto analysis powered by advanced AI</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 bg-charcoal-800 rounded-lg px-3 py-1.5">
+                <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
+                <span className="text-charcoal-300 text-sm">5 Agents Online</span>
+              </div>
+              <Badge variant="outline" className="border-lime-400/50 text-lime-400 bg-lime-400/10">
+                Free Tier
+              </Badge>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-charcoal-600 text-charcoal-300 hover:border-lime-400/50 hover:text-lime-400"
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Connect Wallet
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        {/* Chat Messages Area */}
+        <div className="flex-1 flex">
+          {/* Messages */}
+          <div className="flex-1 flex flex-col">
+            <ScrollArea className="flex-1 px-8 py-6">
+              <div className="max-w-4xl mx-auto space-y-8">
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-3xl ${message.type === 'user' ? 'bg-lime-400 text-charcoal-950' : message.isError ? 'bg-red-900/50 border border-red-800 text-red-100' : 'bg-gradient-to-br from-charcoal-900 to-charcoal-800 text-charcoal-100 border border-charcoal-700'} rounded-2xl p-6 shadow-lg`}>
+                      {/* Message Header */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`w-8 h-8 ${message.type === 'user' ? 'bg-charcoal-950/20' : 'bg-lime-400'} rounded-lg flex items-center justify-center`}>
+                          {message.type === 'user' ? (
+                            <Users className="w-4 h-4" />
+                          ) : (
+                            <Bot className="w-4 h-4 text-charcoal-950" />
+                          )}
+                        </div>
+                        <div>
+                          <div className="font-semibold">
+                            {message.type === 'user' ? 'You' : 'Juno AI'}
+                          </div>
+                          <div className={`text-xs ${message.type === 'user' ? 'text-charcoal-700' : 'text-charcoal-500'}`}>
+                            {message.timestamp.toLocaleTimeString()}
+                          </div>
                         </div>
                       </div>
 
-                      {/* Agent Evidence */}
-                      <div>
-                        <h4 className="font-semibold text-charcoal-200 mb-2">Agent Analysis</h4>
-                        <div className="grid grid-cols-2 gap-2">
-                          {message.research.agent_evidence.map((agent, index) => (
-                            <div key={index} className="bg-charcoal-800 rounded-lg p-3">
-                              <div className="flex justify-between items-center mb-1">
-                                <span className="text-sm font-medium text-charcoal-300">{agent.agent}</span>
-                                <Badge variant="outline" className="text-xs">
-                                  {agent.confidence}%
+                      {/* Message Content */}
+                      <div className="whitespace-pre-wrap leading-relaxed">{message.content}</div>
+                      
+                      {/* Research Data Visualization */}
+                      {message.research && (
+                        <div className="mt-6 space-y-6">
+                          <Separator className="bg-charcoal-600" />
+                          
+                          {/* Market Analysis Summary */}
+                          <div className="bg-charcoal-800/50 rounded-xl p-4 border border-charcoal-600">
+                            <div className="flex items-center gap-3 mb-3">
+                              <TrendingUp className="w-5 h-5 text-lime-400" />
+                              <h4 className="font-semibold text-charcoal-200">Market Analysis</h4>
+                            </div>
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                              <div className="text-center">
+                                <div className="text-charcoal-400 mb-1">Asset</div>
+                                <div className="font-semibold text-charcoal-200">{message.research.market_view.asset}</div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-charcoal-400 mb-1">Timeframe</div>
+                                <div className="font-semibold text-charcoal-200">{message.research.market_view.timeframe}</div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-charcoal-400 mb-1">Bias</div>
+                                <Badge className={`${message.research.market_view.bias === 'bullish' ? 'bg-green-500' : message.research.market_view.bias === 'bearish' ? 'bg-red-500' : 'bg-gray-500'} text-white`}>
+                                  {message.research.market_view.bias}
                                 </Badge>
                               </div>
-                              <div className="flex items-center gap-2">
-                                {agent.score > 0 ? (
-                                  <TrendingUp className="w-4 h-4 text-green-400" />
-                                ) : (
-                                  <TrendingDown className="w-4 h-4 text-red-400" />
-                                )}
-                                <span className="text-sm text-charcoal-400">
-                                  {agent.score > 0 ? '+' : ''}{agent.score.toFixed(1)}
-                                </span>
+                              <div className="text-center">
+                                <div className="text-charcoal-400 mb-1">Conviction</div>
+                                <div className="font-semibold text-lime-400">{message.research.market_view.conviction}%</div>
                               </div>
                             </div>
-                          ))}
-                        </div>
-                      </div>
+                          </div>
 
-                      {/* Recommendations */}
-                      {message.research.recommendations.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-charcoal-200 mb-2">Recommendations</h4>
-                          <div className="bg-charcoal-800 rounded-lg p-4">
-                            <div className="text-sm text-charcoal-300">
-                              <p><strong>Entry:</strong> {message.research.recommendations[0].entry_zone}</p>
-                              <p><strong>Risk/Reward:</strong> {message.research.recommendations[0].r_r}:1</p>
-                              <p><strong>Probability:</strong> {(message.research.recommendations[0].probability_win * 100).toFixed(0)}%</p>
+                          {/* Agent Analysis Grid */}
+                          <div>
+                            <div className="flex items-center gap-3 mb-4">
+                              <Brain className="w-5 h-5 text-lime-400" />
+                              <h4 className="font-semibold text-charcoal-200">Multi-Agent Analysis</h4>
                             </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {message.research.agent_evidence.map((agent, index) => (
+                                <div key={index} className="bg-charcoal-800/30 rounded-xl p-4 border border-charcoal-600/50">
+                                  <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-2">
+                                      <div className="w-8 h-8 bg-lime-400/20 rounded-lg flex items-center justify-center">
+                                        {agent.agent === 'Sentiment' && <TrendingUp className="w-4 h-4 text-lime-400" />}
+                                        {agent.agent === 'Technical' && <BarChart3 className="w-4 h-4 text-lime-400" />}
+                                        {agent.agent === 'Macro' && <Globe className="w-4 h-4 text-lime-400" />}
+                                        {agent.agent === 'On-Chain' && <Activity className="w-4 h-4 text-lime-400" />}
+                                      </div>
+                                      <span className="font-medium text-charcoal-200">{agent.agent}</span>
+                                    </div>
+                                    <Badge variant="outline" className="text-xs border-charcoal-600 text-charcoal-400">
+                                      {agent.confidence}% confidence
+                                    </Badge>
+                                  </div>
+                                  
+                                  <div className="flex items-center gap-3 mb-3">
+                                    <div className="flex items-center gap-2">
+                                      {agent.score > 0 ? (
+                                        <TrendingUp className="w-4 h-4 text-green-400" />
+                                      ) : agent.score < 0 ? (
+                                        <TrendingDown className="w-4 h-4 text-red-400" />
+                                      ) : (
+                                        <Activity className="w-4 h-4 text-gray-400" />
+                                      )}
+                                      <span className={`font-semibold ${agent.score > 0 ? 'text-green-400' : agent.score < 0 ? 'text-red-400' : 'text-gray-400'}`}>
+                                        {agent.score > 0 ? '+' : ''}{agent.score.toFixed(1)}
+                                      </span>
+                                    </div>
+                                    
+                                    {/* Score visualization bar */}
+                                    <div className="flex-1 bg-charcoal-700 rounded-full h-2">
+                                      <div 
+                                        className={`h-2 rounded-full ${agent.score > 0 ? 'bg-green-400' : agent.score < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
+                                        style={{ width: `${Math.abs(agent.score) * 25}%` }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                  
+                                  {agent.highlights.length > 0 && (
+                                    <div className="text-xs text-charcoal-400">
+                                      {agent.highlights[0]}
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Recommendations */}
+                          {message.research.recommendations.length > 0 && (
+                            <div>
+                              <div className="flex items-center gap-3 mb-4">
+                                <Shield className="w-5 h-5 text-lime-400" />
+                                <h4 className="font-semibold text-charcoal-200">Recommendations</h4>
+                              </div>
+                              <div className="bg-gradient-to-r from-lime-400/10 to-lime-400/5 rounded-xl p-4 border border-lime-400/20">
+                                <div className="grid md:grid-cols-3 gap-4 text-sm">
+                                  <div>
+                                    <div className="text-charcoal-400 mb-1">Entry Zone</div>
+                                    <div className="font-semibold text-charcoal-200">{message.research.recommendations[0].entry_zone}</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-charcoal-400 mb-1">Risk/Reward</div>
+                                    <div className="font-semibold text-lime-400">{message.research.recommendations[0].r_r}:1</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-charcoal-400 mb-1">Win Probability</div>
+                                    <div className="font-semibold text-lime-400">{(message.research.recommendations[0].probability_win * 100).toFixed(0)}%</div>
+                                  </div>
+                                </div>
+                                <div className="mt-3 text-xs text-charcoal-400">
+                                  {message.research.recommendations[0].fit_for_user}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-3 pt-2">
+                            <Button size="sm" variant="outline" className="border-charcoal-600 text-charcoal-300 hover:border-lime-400/50">
+                              <BarChart3 className="w-4 h-4 mr-2" />
+                              View Chart
+                            </Button>
+                            <Button size="sm" variant="outline" className="border-charcoal-600 text-charcoal-300 hover:border-lime-400/50">
+                              <TrendingUp className="w-4 h-4 mr-2" />
+                              Backtest
+                            </Button>
+                            <Button size="sm" variant="outline" className="border-charcoal-600 text-charcoal-300 hover:border-lime-400/50">
+                              <Activity className="w-4 h-4 mr-2" />
+                              Set Alert
+                            </Button>
                           </div>
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                ))}
+                
+                {loading && (
+                  <div className="flex justify-start">
+                    <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 text-charcoal-100 rounded-2xl p-6 border border-charcoal-700 shadow-lg max-w-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 bg-lime-400 rounded-lg flex items-center justify-center">
+                          <Bot className="w-4 h-4 text-charcoal-950" />
+                        </div>
+                        <div>
+                          <div className="font-semibold">Juno AI</div>
+                          <div className="text-xs text-charcoal-500">Processing...</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 bg-lime-400 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
+                          <div className="w-2 h-2 bg-lime-400 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
+                          <div className="w-2 h-2 bg-lime-400 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+                        </div>
+                        <span className="text-charcoal-400">Coordinating multi-agent analysis...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
-            ))}
-            
-            {loading && (
-              <div className="flex justify-start">
-                <div className="bg-charcoal-900 text-charcoal-100 rounded-2xl px-6 py-4">
-                  <div className="flex items-center gap-2">
-                    <div className="animate-spin w-4 h-4 border-2 border-lime-400 border-t-transparent rounded-full"></div>
-                    <span>Analyzing with multi-agent system...</span>
+            </ScrollArea>
+
+            {/* Input Area */}
+            <div className="border-t border-charcoal-800 bg-charcoal-950/50 backdrop-blur-sm p-6">
+              <div className="max-w-4xl mx-auto">
+                <div className="relative">
+                  <Input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Ask about crypto markets, technical analysis, sentiment, or on-chain data..."
+                    className="flex-1 bg-charcoal-900 border-charcoal-700 text-charcoal-100 placeholder-charcoal-500 pr-20 py-4 text-base rounded-xl focus:border-lime-400/50 focus:ring-lime-400/20"
+                    disabled={loading}
+                  />
+                  <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <Button 
+                      size="sm"
+                      variant="ghost"
+                      className="text-charcoal-500 hover:text-lime-400"
+                      onClick={() => setInput("/help")}
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      onClick={sendMessage}
+                      disabled={loading || !input.trim()}
+                      className="bg-lime-400 text-charcoal-950 hover:bg-lime-300 disabled:bg-charcoal-700 disabled:text-charcoal-500 px-4 py-2 rounded-lg"
+                    >
+                      {loading ? (
+                        <div className="w-4 h-4 border-2 border-charcoal-950 border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        <ArrowRight className="w-4 h-4" />
+                      )}
+                    </Button>
                   </div>
                 </div>
+                
+                {/* Quick suggestions */}
+                <div className="flex gap-2 mt-3 flex-wrap">
+                  {quickActions.slice(0, 3).map((action, index) => (
+                    <Button
+                      key={index}
+                      size="sm"
+                      variant="ghost"
+                      className="text-charcoal-400 hover:text-lime-400 hover:bg-charcoal-800 text-xs"
+                      onClick={() => setInput(action.query)}
+                      disabled={loading}
+                    >
+                      {action.label}
+                    </Button>
+                  ))}
+                </div>
               </div>
-            )}
-            <div ref={messagesEndRef} />
+            </div>
           </div>
-        </ScrollArea>
 
-        {/* Input Area */}
-        <div className="flex gap-3">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Ask about crypto markets, get analysis, or try: 'Analyze BTC'"
-            className="flex-1 bg-charcoal-900 border-charcoal-700 text-charcoal-100 placeholder-charcoal-500"
-            disabled={loading}
-          />
-          <Button 
-            onClick={sendMessage}
-            disabled={loading || !input.trim()}
-            className="bg-lime-400 text-charcoal-950 hover:bg-lime-300"
-          >
-            Send
-          </Button>
+          {/* Right Panel - Tech Visualization */}
+          <div className="w-80 border-l border-charcoal-800 bg-gradient-to-b from-charcoal-900 to-charcoal-800 p-6">
+            <h3 className="text-lg font-semibold text-charcoal-100 mb-6">AI Network Status</h3>
+            
+            {/* Neural Network Visualization */}
+            <div className="mb-6">
+              <img 
+                src="https://images.unsplash.com/photo-1645839057098-5ea8761a6b09?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxBSSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MHx8fHwxNzU1NTg3NjA2fDA&ixlib=rb-4.1.0&q=85" 
+                alt="AI Neural Network" 
+                className="rounded-xl w-full h-40 object-cover opacity-80"
+              />
+              <div className="mt-3 text-center">
+                <div className="text-lime-400 font-semibold">Network Active</div>
+                <div className="text-charcoal-400 text-sm">Processing 1,247 data points/sec</div>
+              </div>
+            </div>
+
+            {/* Performance Metrics */}
+            <div className="space-y-4 mb-6">
+              <div className="bg-charcoal-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-charcoal-300 text-sm">Response Time</span>
+                  <span className="text-lime-400 font-semibold">2.3s</span>
+                </div>
+                <div className="bg-charcoal-700 rounded-full h-2">
+                  <div className="bg-lime-400 rounded-full h-2" style={{width: '85%'}}></div>
+                </div>
+              </div>
+
+              <div className="bg-charcoal-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-charcoal-300 text-sm">Accuracy Score</span>
+                  <span className="text-lime-400 font-semibold">94.2%</span>
+                </div>
+                <div className="bg-charcoal-700 rounded-full h-2">
+                  <div className="bg-lime-400 rounded-full h-2" style={{width: '94%'}}></div>
+                </div>
+              </div>
+
+              <div className="bg-charcoal-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-charcoal-300 text-sm">Data Coverage</span>
+                  <span className="text-lime-400 font-semibold">98.7%</span>
+                </div>
+                <div className="bg-charcoal-700 rounded-full h-2">
+                  <div className="bg-lime-400 rounded-full h-2" style={{width: '98%'}}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Insights */}
+            <div>
+              <h4 className="text-charcoal-100 font-semibold mb-3">Recent Insights</h4>
+              <div className="space-y-3 text-xs">
+                <div className="bg-charcoal-800/50 rounded-lg p-3">
+                  <div className="text-lime-400 font-medium mb-1">BTC Sentiment Shift</div>
+                  <div className="text-charcoal-400">Detected 15% increase in positive sentiment over 4h</div>
+                </div>
+                <div className="bg-charcoal-800/50 rounded-lg p-3">
+                  <div className="text-lime-400 font-medium mb-1">ETH On-Chain Activity</div>
+                  <div className="text-charcoal-400">Whale accumulation pattern identified</div>
+                </div>
+                <div className="bg-charcoal-800/50 rounded-lg p-3">
+                  <div className="text-lime-400 font-medium mb-1">Macro Alert</div>
+                  <div className="text-charcoal-400">Fed policy expectations shifting</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
